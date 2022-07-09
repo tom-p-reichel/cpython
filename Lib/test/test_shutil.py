@@ -754,6 +754,9 @@ class TestCopyTree(BaseTest, unittest.TestCase):
     def test_copytree_dangling_symlinks(self):
         # a dangling symlink raises an error at the end
         src_dir = self.mkdtemp()
+        src_subdir = os.path.join(src_dir,'subdir')
+        os.mkdir(src_subdir)
+        os.symlink('IDONTEXIST', os.path.join(src_subdir,'test.txt'))
         dst_dir = os.path.join(self.mkdtemp(), 'destination')
         os.symlink('IDONTEXIST', os.path.join(src_dir, 'test.txt'))
         os.mkdir(os.path.join(src_dir, 'test_dir'))
